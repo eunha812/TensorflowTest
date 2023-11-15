@@ -28,18 +28,18 @@ const Tensorflow: React.FC = () => {
     modelRef.current = await tmPose.load(modelURL, metadataURL);
     maxPredictionsRef.current = modelRef.current.getTotalClasses();
 
-    // const size = 500;
-    // const flip = true;
+    const size = 500;
+    const flip = true;
 
-    webcamRef.current = new tmPose.Webcam(500, 500, true);
+    webcamRef.current = new tmPose.Webcam(size, size, flip);
     await webcamRef.current.setup();
     await webcamRef.current.play();
     window.requestAnimationFrame(loop);
 
     const canvas = canvasRef.current;
     if (canvas) {
-      canvas.width = 500;
-      canvas.height = 500;
+      canvas.width = size;
+      canvas.height = size;
     }
 
     labelContainerRef.current = document.getElementById(
@@ -72,8 +72,8 @@ const Tensorflow: React.FC = () => {
         webcamRef.current.canvas
       );
 
-      console.log('pose : ', pose);
-      console.log('posenetOutput : ', posenetOutput);
+      // console.log('pose : ', pose);
+      // console.log('posenetOutput : ', posenetOutput);
 
       const predictions = await modelRef.current.predict(posenetOutput);
 
@@ -97,9 +97,10 @@ const Tensorflow: React.FC = () => {
 
         // 모션을 인식해 웹캠상에서 좌표를 그리는 코드
         if (pose) {
-          const minPartConfidence = 0.5;
-          tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
-          tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+          // const minPartConfidence = 0.5;
+          // tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+          // tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+          console.log(pose.keypoints);
         }
       }
     }
