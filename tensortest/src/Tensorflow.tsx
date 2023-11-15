@@ -28,18 +28,18 @@ const Tensorflow: React.FC = () => {
     modelRef.current = await tmPose.load(modelURL, metadataURL);
     maxPredictionsRef.current = modelRef.current.getTotalClasses();
 
-    const size = 500;
-    const flip = true;
+    // const size = 500;
+    // const flip = true;
 
-    webcamRef.current = new tmPose.Webcam(size, size, flip);
+    webcamRef.current = new tmPose.Webcam(500, 500, true);
     await webcamRef.current.setup();
     await webcamRef.current.play();
     window.requestAnimationFrame(loop);
 
     const canvas = canvasRef.current;
     if (canvas) {
-      canvas.width = size;
-      canvas.height = size;
+      canvas.width = 500;
+      canvas.height = 500;
     }
 
     labelContainerRef.current = document.getElementById(
@@ -132,7 +132,7 @@ const Tensorflow: React.FC = () => {
   return (
     <>
       <button
-        type='button'
+        type="button"
         onClick={() => {
           init();
           set서있는중(false);
@@ -141,8 +141,8 @@ const Tensorflow: React.FC = () => {
       >
         Start
       </button>
-      <div className='border-4 border-red-600'>
-        <canvas id='canvas' ref={canvasRef}></canvas>
+      <div className="border-4 border-red-600">
+        <canvas id="canvas" ref={canvasRef}></canvas>
       </div>
       {/* <div id='label-container' ref={labelContainerRef}></div> */}
       <div>
